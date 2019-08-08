@@ -1,0 +1,11 @@
+8
+
+https://www.reddit.com/
+https://www.reddit.com/sw.js
+true
+{2f5ee9e1-219b-4806-a8c0-0e7ecc1be73f}
+0
+1565200302049444
+1565200302317788
+1565200301872848
+#

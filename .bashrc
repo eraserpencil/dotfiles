@@ -157,43 +157,21 @@ fi
 if [ -z /usr/local/bin/tmux ] && [ -f ~/.tmux.conf ]; then
    tmux source-file ~/.tmux.conf
 fi
-
-source /opt/ros/kinetic/setup.bash
-source ~/mov/catkin_ws/devel/setup.bash
-
-export ROS_MASTER_URI=http://localhost:11311
-export ROS_WORKSPACE=~/mov/catkin_ws/
-export PYTHONPATH=~/projects:$PYTHONPATH
-export PATH=/home/ryan/Documents/projects:/usr/local/cuda-10.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:/usr/lib/gcc/x86_64-linux-gnu/5/:$LD_LIBRARY_PATH
-export CC=/usr/local/bin/clang/clang-7
-export CXX=/usr/local/bin/clang/clang++
-export CMAKE_C_COMPILER=/usr/local/bin/clang/clang-7
-export CMAKE_CXX_COMPILER=/usr/local/bin/clang/clang++
-export CMAKE_C_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Wno-narrowing -Wno-implicit-function-declaration"
-export CMAKE_CXX_FLAGS="-std=c++11 -Wall -Wextra -Wpedantic -Wno-narrowing -Wno-implicit-function-declaration"
-export CLANG_DEFAULT_CXX_STDLIB=libc++
+#export CC=/usr/local/bin/clang/clang-7
+#export CXX=/usr/local/bin/clang/clang++
+#export CMAKE_C_COMPILER=/usr/local/bin/clang/clang-7
+#export CMAKE_CXX_COMPILER=/usr/local/bin/clang/clang++
+#export CMAKE_C_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Wno-narrowing -Wno-implicit-function-declaration"
+#export CMAKE_CXX_FLAGS="-std=c++11 -Wall -Wextra -Wpedantic -Wno-narrowing -Wno-implicit-function-declaration"
+#export CLANG_DEFAULT_CXX_STDLIB=libc++
 export DOCKER_BUILDKIT=1
 #export CLANG_DEFAULT_RTLIB=compiler-rt
 
 alias tree="tree -f"
-alias grep="rg"
 alias uu='apt update && sudo apt upgrade && sudo snap refresh'
 alias df="df -h -x squashfs"
 alias sudo='sudo '
 alias dgrep='sudo dpkg --get-selections | grep '
-alias movsource='movbuild && source ~/.bashrc'
 alias mkdir="mkdir -p -v"
-alias cdpro='cd ~/Documents/projects'
-alias cddown='cd ~/snap/firefox/common/Downloads'
 alias cdcon='cd ~/.config'
-alias cdsrc=' cd ~/Documents/src'
-alias cdpy3='cd ~/.local/lib/python3.5/site-packages/'
-alias cdpy='cd ~/.local/lib/python2.7/site-packages/'
 alias unlock='sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a'
-
-alias linode='ssh ryan@172.104.52.156'
-alias linode1='ssh ryan@172.104.168.8'
-alias d.o='ssh ryan@128.199.212.7'
-
-source /etc/profile.d/undistract-me.sh
