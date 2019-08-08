@@ -27,7 +27,6 @@ if [ -d $HOME/.vimrc ]; then
 	mv $HOME/.vimrc $HOME/.bak/.vimrc.bak
 fi
 
-
 echo " "
 echo "---------- Installing i3-Gaps ----------"
 echo " "
@@ -65,9 +64,21 @@ sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
 sudo update-alternatives --set vi /usr/local/bin/vim
 
 echo " "
-echo "---------- Installing Ripgrep 11.0.2 ----------"
+echo "---------- Installing Ripgrep ----------"
 echo " "
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
-sudo apt install firefox ncdu tree htop 
+#echo " "
+#echo "---------- Installing ST ----------"
+#echo " "
+#cd $HOME/src
+#wget https://dl.suckless.org/st/st-0.8.2.tar.gz
+#tar -zxf st-0.8.2.tar.gz
+#rm -rf st-0.8.2.tar.gz
+#cd st-0.8.2
+
+sudo apt install firefox ncdu tree htop feh
+
+mkdir $HOME/Pictures
+cp $HOME/config/dracula.png $HOME/Pictures/
