@@ -1,6 +1,14 @@
 #!/bin/bash
 
 echo " "
+echo "---------- Setting up wifi ----------"
+echo " "
+
+sudo apt install linux-headers-generic network-manager wireless-tools x11-xserver-utils blueman xbacklight compiz dconf-cli uuid-runtime
+
+echo " "
+echo "---------- Transferring configs -----------"
+echo " "
 
 if [ ! -d $HOME/.bak ]; then
     echo "Creating $HOME/.bak"
@@ -27,6 +35,10 @@ if [ -d $HOME/.vimrc ]; then
 	mv $HOME/.vimrc $HOME/.bak/.vimrc.bak
 fi
 
+if [ -d $HOME/.Xresources ]; then
+	mv $HOME/.Xresources $HOME/.bak/.Xresources.bak
+fi
+
 echo " "
 echo "---------- Installing i3-Gaps ----------"
 echo " "
@@ -43,10 +55,6 @@ echo "---------- Installing Vim 8.1 ----------"
 echo " "
 sudo apt install libncurses5-dev git python-dev gcc
 
-if [ ! -d $HOME/src ]; then
-    echo "Creating $HOME/.src"
-    mkdir $HOME/src
-fi
 git clone https://github.com/vim/vim.git $HOME/src/vim
 cd $HOME/src/vim
 git checkout v8.1.1775
@@ -69,16 +77,14 @@ echo " "
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
-#echo " "
-#echo "---------- Installing ST ----------"
-#echo " "
-#cd $HOME/src
-#wget https://dl.suckless.org/st/st-0.8.2.tar.gz
-#tar -zxf st-0.8.2.tar.gz
-#rm -rf st-0.8.2.tar.gz
-#cd st-0.8.2
-
-sudo apt install firefox ncdu tree htop feh
+sudo apt install firefox ncdu tree htop feh rxvt-unicode-256color
 
 mkdir $HOME/Pictures
 cp $HOME/config/dracula.png $HOME/Pictures/
+
+echo " "
+echo "---------- Installing Python 2.7 ----------"
+echo " "
+sudo apt install python-pip
+pip install --user psutil netifaces
+
