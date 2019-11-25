@@ -166,7 +166,7 @@ alias dgrep='sudo dpkg --get-selections | grep '
 alias mkdir="mkdir -p -v"
 alias cdcon='cd ~/.config'
 alias unlock='sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a'
-alias cddot'cd $HOME/.dotfiles"
+alias cddot='cd $HOME/.dotfiles'
 
 ln -fs $HOME/.dotfiles/.bashrc $HOME/.bashrc
 ln -fs $HOME/.dotfiles/.tmux-keybinds $HOME/.tmux-keybinds

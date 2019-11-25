@@ -37,7 +37,7 @@ Plug 'gabrielelana/vim-markdown'
 " Core Vim customization
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -131,13 +131,43 @@ let g:markdown_include_jekyll_support = 0
 nmap / <Plug>(easymotion-tn)
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
 
-" ALE configurations
+"""""""""""""""""""""""""""""
+"    ALE configurations
+"""""""""""""""""""""""""""""
+let g:ale_cpp_gcc_options = '-std=c++11 -Wall'
 let g:ale_sign_column_always = 1
-let g:ale_list_window_size = 3
 let g:ale_fix_on_save = 1
-let g:ale_cpp_clang_options = "-std=c++11 -Wall"
-let g:ale_c_build_dir = "/home/ryan/mov/catkin_ws/src"
-let g:ale_c_parse_makefule = 1
+let g:ale_fixers = {
+    \   '*':['remove_trailing_lines','trim_whitespace'],
+    \   'cpp': ['clang-format', 'clangtidy']
+    \}
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 1
+let g:ale_linters={
+    \   'cpp' : ['clang', 'g++'],
+    \   'python': ['flake8'],
+    \   'sh' : ['language_server'],
+    \   'cmake' : ['cmake_format', 'cmakelint'],
+    \   'dockerfile' : ['hadolint'],
+    \   'yaml' : ['yamllint']
+    \}
+function! UpdateROSIncludeDirs()
+    let l:ros_package_path=split($ROS_PACKAGE_PATH, ':')
+    let l:cmake_prefix_path=split($CMAKE_PREFIX_PATH, ':')
+    let l:paths=l:ros_package_path+l:cmake_prefix_path
+    for path in l:paths
+        if len($CPATH)
+            let $CPATH.=':'.path.'/include'
+        else
+            let $CPATH.=path.'/include'
+        endif
+    endfor
+endfunction
+
+call UpdateROSIncludeDirs()
+" Move between errors with Ctrl+j and Ctrl+k
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Lightline Config
 set laststatus=2
@@ -167,7 +197,6 @@ set ttimeoutlen=50 " Make airline mode update faster
 "       \     'linter_errors': 'error',
 "       \     'linter_ok': 'left',
 "       \ }
-"
 " let g:lightline.active = { 'right': [['filetype'], ['lineinfo'], ['linter_checking','linter_errors', 'linter_warnings', 'linter_ok']] }
 
 " Buffergator config
