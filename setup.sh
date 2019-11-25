@@ -77,6 +77,9 @@ echo " "
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
+echo " "
+echo "---------- Installing other good to have packages -----------"
+
 sudo apt install firefox ncdu tree htop feh rxvt-unicode-256color
 
 mkdir $HOME/Pictures
@@ -85,6 +88,7 @@ cp $HOME/config/dracula.png $HOME/Pictures/
 echo " "
 echo "---------- Installing Python 2.7 ----------"
 echo " "
+
 sudo apt install python-pip
 pip install --user psutil netifaces
 

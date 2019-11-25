@@ -157,15 +157,6 @@ fi
 if [ -z /usr/local/bin/tmux ] && [ -f ~/.tmux.conf ]; then
    tmux source-file ~/.tmux.conf
 fi
-#export CC=/usr/local/bin/clang/clang-7
-#export CXX=/usr/local/bin/clang/clang++
-#export CMAKE_C_COMPILER=/usr/local/bin/clang/clang-7
-#export CMAKE_CXX_COMPILER=/usr/local/bin/clang/clang++
-#export CMAKE_C_FLAGS="-std=c11 -Wall -Wextra -Wpedantic -Wno-narrowing -Wno-implicit-function-declaration"
-#export CMAKE_CXX_FLAGS="-std=c++11 -Wall -Wextra -Wpedantic -Wno-narrowing -Wno-implicit-function-declaration"
-#export CLANG_DEFAULT_CXX_STDLIB=libc++
-export DOCKER_BUILDKIT=1
-#export CLANG_DEFAULT_RTLIB=compiler-rt
 
 alias tree="tree -f"
 alias uu='apt update && sudo apt upgrade && sudo snap refresh'
@@ -175,3 +166,11 @@ alias dgrep='sudo dpkg --get-selections | grep '
 alias mkdir="mkdir -p -v"
 alias cdcon='cd ~/.config'
 alias unlock='sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a'
+alias cddot'cd $HOME/.dotfiles"
+
+ln -fs $HOME/.dotfiles/.bashrc $HOME/.bashrc
+ln -fs $HOME/.dotfiles/.tmux-keybinds $HOME/.tmux-keybinds
+ln -fs $HOME/.dotfiles/.tmux-reset $HOME/.tmux-reset
+ln -fs $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
+ln -fs $HOME/.dotfiles/.vimrc $HOME/.vimrc
+
