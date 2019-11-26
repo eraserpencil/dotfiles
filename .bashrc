@@ -176,3 +176,4 @@ ln -fs $HOME/.dotfiles/.tmux-reset $HOME/.tmux-reset
 ln -fs $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
 ln -fs $HOME/.dotfiles/.vimrc $HOME/.vimrc
 ln -fs $HOME/.dotfiles/i3/config $HOME/.config/i3/config
+ln -fs $HOME/.dotfiles/.bash_custom $HOME/.bash_custom
