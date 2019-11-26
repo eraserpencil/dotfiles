@@ -5,7 +5,7 @@
     "unknown": { "prefix": "" }
   },
   "date": { "prefix": "" },
-  "time": { "prefix": "" },
+  "time": { "prefix": "" },
   "datetime": { "prefix": "" },
   "datetz": { "prefix": "" },
   "timetz": { "prefix": "" },
@@ -55,12 +55,12 @@
     "next": { "prefix": "" }
   },
   "pasink": {
-    "muted": { "prefix": "" },
+    "muted": { "prefix": "" },
     "unmuted": { "prefix": "" }
   },
   "amixer": {
-    "muted": { "prefix": "" },
-    "unmuted": { "prefix": "" }
+    "muted": { "prefix": "Vol" },
+    "unmuted": { "prefix": "Vol" }
   },
   "pasource": {
     "muted": { "prefix": "" },

@@ -53,8 +53,8 @@ set-window-option -ug automatic-rename
 set-window-option -ug automatic-rename-format
 set-window-option -ug clock-mode-colour
 set-window-option -ug clock-mode-style
-set-window-option -ug force-height
-set-window-option -ug force-width
+# set-window-option -ug force-height
+# set-window-option -ug force-width
 set-window-option -ug main-pane-height
 set-window-option -ug main-pane-width
 set-window-option -ug mode-style
@@ -305,4 +305,3 @@ bind -Tcopy-mode-vi Left send -X cursor-left
 bind -Tcopy-mode-vi Right send -X cursor-right
 bind -Tcopy-mode-vi C-Up send -X scroll-up
 bind -Tcopy-mode-vi C-Down send -X scroll-down
-

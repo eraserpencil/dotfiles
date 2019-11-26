@@ -21,7 +21,7 @@ class Module(bumblebee.engine.Module):
     def __init__(self, engine, config):
         widgets = []
         super(Module, self).__init__(engine, config, widgets)
-        self._exclude = tuple(filter(len, self.parameter("exclude", "lo,virbr,docker,vboxnet,veth").split(",")))
+        self._exclude = tuple(filter(len, self.parameter("exclude", "lo,virbr,docker,anbox,vboxnet,veth").split(",")))
         self._status = ""
 
         self._showname = bumblebee.util.asbool(self.parameter("showname", True))
@@ -104,7 +104,7 @@ class Module(bumblebee.engine.Module):
                 prev = self._prev.get(name, 0)
                 speed = bumblebee.util.bytefmt((int(data[direction]) - int(prev))/timediff)
                 txtspeed ='{0}/s'.format(speed)
-                widget.full_text(txtspeed) 
+                widget.full_text(txtspeed)
                 self._prev[name] = data[direction]
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
