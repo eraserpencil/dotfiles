@@ -27,6 +27,8 @@ Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
 Plug 'taketwo/vim-ros'
 Plug 'maximbaz/lightline-ale'
+Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/indentLine'
 
 " Document/Writing Support
 Plug 'vim-latex/vim-latex'
@@ -38,12 +40,9 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
 "Plug 'SirVer/ultisnips'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'danro/rename.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-gitgutter'
+Plug 'jeetsukumaran/vim-buffergator'
 
 call plug#end()
 
@@ -66,34 +65,16 @@ set formatoptions=coql
 highlight ColorColumn ctermbg=darkgrey
 autocmd FileType python set colorcolumn=80 listchars=tab:>-,trail:~ list
 autocmd FileType cpp set colorcolumn=120 tabstop=2 shiftwidth=2 softtabstop=2 listchars=tab:>-,trail:~ list
-autocmd FileType c set colorcolumn=80 tabstop=2 shiftwidth=2 softtabstop=2 listchars=tab:>-,trail:~ list
+autocmd FileType cc set colorcolumn=120 tabstop=2 shiftwidth=2 softtabstop=2 listchars=tab:>-,trail:~ list
+autocmd FileType h set colorcolumn=120 tabstop=2 shiftwidth=2 softtabstop=2 listchars=tab:>-,trail:~ list
+autocmd FileType hpp set colorcolumn=120 tabstop=2 shiftwidth=2 softtabstop=2 listchars=tab:>-,trail:~ list
+autocmd FileType c set colorcolumn=120 tabstop=2 shiftwidth=2 softtabstop=2 listchars=tab:>-,trail:~ list
 autocmd FileType xml set tabstop=2 shiftwidth=2 listchars=tab:>-,trail:~ list
 autocmd FileType yaml set tabstop=2 shiftwidth=2 listchars=tab:>-,trail:~ list
 
 " Show linenumbers
 set number
 set relativenumber
-
-" Set change word to WORD
-vnoremap <leader>" di""<esc>hp
-vnoremap <leader>' di''<esc>hp
-vnoremap <leader>< di<><esc>hp
-vnoremap <leader>{ di{}<esc>hp
-vnoremap <leader>[ di[]<esc>hp
-
-" Split navigations
-nnoremap <C-j> <C-W><C-J>
-nnoremap <C-k> <C-W><C-K>
-nnoremap <C-l> <C-W><C-L>
-nnoremap <C-h> <C-W><C-H>
-nnoremap j gj
-nnoremap k gk
-
-" Navigation edit
-nnoremap <C-O> O<Esc>
-nnoremap <C-o> o<Esc>
-nnoremap H 0
-nnoremap L $
 
 " Using system's primary/clipboard selections
 noremap <Leader>Y "*y
@@ -109,7 +90,6 @@ set nolist                    " prevents linebreak from not working
 set cursorline
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')           " lin- jumps around line wrapping
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')           " line jumps around line wrapping
-
 
 " Vim-markdown config
 let g:markdown_include_jekyll_support = 0
@@ -132,7 +112,7 @@ nmap / <Plug>(easymotion-tn)
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
 
 """""""""""""""""""""""""""""
-"    ALE configurations
+"   ALE configurations
 """""""""""""""""""""""""""""
 let g:ale_cpp_gcc_options = '-std=c++11 -Wall'
 let g:ale_sign_column_always = 1
@@ -141,8 +121,6 @@ let g:ale_fixers = {
     \   '*':['remove_trailing_lines','trim_whitespace'],
     \   'cpp': ['clang-format', 'clangtidy']
     \}
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 1
 let g:ale_linters={
     \   'cpp' : ['clang', 'g++'],
     \   'python': ['flake8'],
@@ -169,50 +147,37 @@ call UpdateROSIncludeDirs()
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Lightline Config
+""""""""""""""""""""""""""""""""""""
+"   Lightline/ALE configurations
+""""""""""""""""""""""""""""""""""""
 set laststatus=2
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'darcula',
       \ }
 
-" -------------- Airline status bar config
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'angr'
-let g:bufferline_echo = 0
-let g:airline#extensions#tabline#enabled = 1
-set ttimeoutlen=50 " Make airline mode update faster
+" Lightline Ale
+ let g:lightline.component_expand = {
+       \  'linter_checking': 'lightline#ale#checking',
+       \  'linter_warnings': 'lightline#ale#warnings',
+       \  'linter_errors': 'lightline#ale#errors',
+       \  'linter_ok': 'lightline#ale#ok',
+       \ }
 
-" " Lightline Ale
-" let g:lightline.component_expand = {
-"       \  'linter_checking': 'lightline#ale#checking',
-"       \  'linter_warnings': 'lightline#ale#warnings',
-"       \  'linter_errors': 'lightline#ale#errors',
-"       \  'linter_ok': 'lightline#ale#ok',
-"       \ }
-"
-" let g:lightline.component_type = {
-"       \     'linter_checking': 'left',
-"       \     'linter_warnings': 'warning',
-"       \     'linter_errors': 'error',
-"       \     'linter_ok': 'left',
-"       \ }
-" let g:lightline.active = { 'right': [['filetype'], ['lineinfo'], ['linter_checking','linter_errors', 'linter_warnings', 'linter_ok']] }
+ let g:lightline.component_type = {
+       \     'linter_checking': 'left',
+       \     'linter_warnings': 'warning',
+       \     'linter_errors': 'error',
+       \     'linter_ok': 'left',
+       \ }
+ let g:lightline.active = { 'right': [['filetype'], ['percent', 'lineinfo'], ['linter_checking','linter_errors', 'linter_warnings', 'linter_ok']] }
 
-" Buffergator config
-" let g:buffergator_suppress_mru_switch_into_splits_keymaps = 1
+let g:ycm_semantic_triggers = {
+\   'roslaunch' : ['="', '$(', '/'],
+\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
+\ }
 
-
-" Default fzf layout
-let g:fzf_layout = { 'down': '30%' }
-
-" Completer config
-let g:completer_python_binary = '/home/ryan/.local/lib/python2.7/site-packages'
-
-" SuperTab config
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" ros-vim Config
+" vim-ros Config
 let g:ros_build_system = "catkin-tools"
 
 " -------------- CtrlP config
@@ -221,6 +186,16 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_max_depth = 40
 let g:ctrlp_working_path_mode = 'ra'
+
+" ignore compiled files
+set wildignore+=*.bin,*/bin/*,*.lib
+set wildignore+=*.pyc " python
+set wildignore+=*/build/*,*/devel/*,*/logs/* " catkin workspace
+set wildignore+=*.o,*.so,*.a " cpp
+set wildignore+=*.swp,*~ " swaps
+set wildignore+=*.zip,*.deb
+set wildignore+=*/.git/* " git
+let g:ctrlp_max_depth = 40
 
 " -------------- Running python/bash scripts from vim
 nnoremap <Leader>rp2 :echo system('python2 "' . expand('%') . '"')<cr>

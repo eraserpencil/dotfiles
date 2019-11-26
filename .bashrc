@@ -158,6 +158,8 @@ if [ -z /usr/local/bin/tmux ] && [ -f ~/.tmux.conf ]; then
    tmux source-file ~/.tmux.conf
 fi
 
+source ~/.bash_custom
+
 alias tree="tree -f"
 alias uu='apt update && sudo apt upgrade && sudo snap refresh'
 alias df="df -h -x squashfs"
