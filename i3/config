@@ -29,6 +29,9 @@ font pango:DejaVu Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+exec killall -q dunst
+exec killall -q notify-osd
+exec --no-startup-id dunst -config ~/.dotfiles/.dunstrc &
 exec --no-startup-id feh --bg-scale /home/ryan/Pictures/dracula.png
 exec --no-startup-id compton
 
