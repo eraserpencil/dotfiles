@@ -32,9 +32,7 @@ Plug 'Yggdroot/indentLine'
 
 " Document/Writing Support
 Plug 'vim-latex/vim-latex'
-" Plug 'SidOfc/mkdx'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'gabrielelana/vim-markdown'
 
 " Core Vim customization
 Plug 'itchyny/lightline.vim'
@@ -90,22 +88,6 @@ set nolist                    " prevents linebreak from not working
 set cursorline
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')           " lin- jumps around line wrapping
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')           " line jumps around line wrapping
-
-" Vim-markdown config
-let g:markdown_include_jekyll_support = 0
-
-"" MKDX config
-"let g:mkdx#settings = { 'fold': { 'components': ['toc'] } }
-"let g:mkdx#settings = { 'fold': { 'enable': 1 } }
-"let g:mkdx#settings = { 'links': { 'external': { 'user_agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0' } } }
-"let g:mkdx#settings = { 'tokens': { 'fence': '`' } }
-"let g:mkdx#settings = { 'tokens': { 'italic': '~' } }
-"let g:mkdx#settings = { 'tokens': { 'strike': '_' } }
-"let g:mkdx#settings = { 'image_extension_pattern': 'a\?png\|jpg\?g\|gif' }
-"let g:mkdx#settings = { 'checkbox': { 'toggles': [' ', 'x'] } }
-"let g:mkdx#settings = { 'toc': { 'save_on_write': 1 } }
-"let g:mkdx#settings = { 'toc': { 'position': 1 } }
-
 
 " EasyMotion Config
 nmap / <Plug>(easymotion-tn)
