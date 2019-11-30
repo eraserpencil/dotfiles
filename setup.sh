@@ -3,10 +3,10 @@
 sudo apt update && sudo apt upgrade
 
 echo " "
-echo "---------- Setting up hardware ----------"
+echo "---------- Setting up necessary packages ----------"
 echo " "
 
-sudo apt install linux-headers-generic network-manager wireless-tools x11-xserver-utils blueman xbacklight compiz dconf-cli uuid-runtime
+sudo apt install linux-headers-generic network-manager wireless-tools x11-xserver-utils blueman xbacklight compiz dconf-cli uuid-runtime curl
 
 echo " "
 echo "---------- Transferring configs -----------"
@@ -21,9 +21,28 @@ ln -fs $HOME/.dotfiles/.vimrc $HOME/.vimrc
 echo " "
 echo "---------- Installing i3-Gaps ----------"
 echo " "
-sudo add-apt-repository ppa:jonathonf/i3
-sudo apt update
-sudo apt install i3-gaps
+sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool automake libxcb-shape0-dev
+cd $HOME
+mkdir Documents
+cd Documents
+git clone https://github.com/Airblader/xcb-util-xrm
+cd xcb-util-xrm
+git submodule update --init
+./autogen.sh --prefix=/usr
+make
+sudo make install
+cd $HOME/Documents
+git clone https://www.github.com/Airblader/i3 i3-gaps
+cd i3-gaps
+git checkout gaps && git pull
+autoreconf --force --install
+rm -rf build
+mkdir build
+cd build
+../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+make
+sudo make install
+touch $HOME/.config/i3/config
 ln -fs $HOME/.dotfiles/i3/config $HOME/.config/i3/config
 
 echo " "
@@ -58,19 +77,20 @@ echo "---------- Installing Tilix ----------"
 echo " "
 
 sudo add-apt-repository ppa:webupd8team/terminix
-sudu apt update
-dconf load /com/gexperts/Tilix/ < $HOME/.dotfiles/terminix.dconf
+sudo apt update
+sudo apt install tilix
+dconf load /com/gexperts/Tilix/ < $HOME/.dotfiles/.terminix.dconf
 dconf reset -f /com/gexperts/Terminix/
 ln -fs $HOME/.dotfiles/tilix $HOME/.config/tilix
 
 echo " "
 echo "---------- Installing other good to have packages -----------"
 
-sudo apt install chromium fonts-font-awesome firefox ncdu tree htop feh rxvt-unicode-256color tilix
+sudo apt install chromium-browser fonts-font-awesome firefox ncdu tree htop feh rxvt-unicode-256color evince tmux
 
-ln -fs $HOME/.dotfiles/.mozilla	$HOME/.mozilla
+ln -fs $HOME/.dotfiles/.mozilla	$HOME/
 mkdir $HOME/Pictures
-cp $HOME/config/dracula.png $HOME/Pictures/
+cp $HOME/.dotfiles/dracula.png $HOME/Pictures/
 
 echo " "
 echo "---------- Installing Python 2.7 ----------"
