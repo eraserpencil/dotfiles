@@ -67,6 +67,16 @@ sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
 sudo update-alternatives --set vi /usr/local/bin/vim
 
 echo " "
+echo "---------- Installing Tmux 3.0 ----------"
+echo " "
+sudo apt install libevent-dev
+cd $HOME/Documents
+git clone https://github.com/tmux/tmux.git
+cd tmux && git checkout 2.9
+sh autogen.sh
+./configure && make
+
+echo " "
 echo "---------- Installing Ripgrep ----------"
 echo " "
 cd $HOME/Documents
@@ -87,7 +97,12 @@ ln -fs $HOME/.dotfiles/tilix $HOME/.config/tilix
 echo " "
 echo "---------- Installing other good to have packages -----------"
 
-sudo apt install chromium-browser fonts-font-awesome firefox ncdu tree htop feh rxvt-unicode-256color evince tmux
+sudo apt install chromium-browser fonts-font-awesome firefox ncdu tree htop feh rxvt-unicode-256color evince tmux texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+cd $HOME/Documents
+wget https://github.com/jgm/pandoc/releases/download/2.8.0.1/pandoc-2.8.0.1-1-amd64.deb
+sudo dpkg -i pandoc-2.8.0.1-1-amd64.deb
+
 
 mkdir $HOME/Pictures
 cp $HOME/.dotfiles/dracula.png $HOME/Pictures/
@@ -101,5 +116,7 @@ pip install --user psutil netifaces
 
 echo " "
 echo "---------- Installing Python 3 ----------"
-sudo apt install python3-pip python3 python3-dev
+sudo add-apt-repository ppa:jonathonf/python-3.6
+sudo apt-get update
+sudo apt install python3-pip python3 python3-dev python3.6
 pip install --user virtualenv
