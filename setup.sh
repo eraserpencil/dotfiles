@@ -22,9 +22,8 @@ echo " "
 echo "---------- Installing i3-Gaps ----------"
 echo " "
 sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool automake libxcb-shape0-dev
-cd $HOME
 mkdir Documents
-cd Documents
+cd $HOME/Documents
 git clone https://github.com/Airblader/xcb-util-xrm
 cd xcb-util-xrm
 git submodule update --init
@@ -48,10 +47,11 @@ ln -fs $HOME/.dotfiles/i3/config $HOME/.config/i3/config
 echo " "
 echo "---------- Installing Vim 8.1 ----------"
 echo " "
+cd $HOME/Documents
 sudo apt install libncurses5-dev git python-dev gcc
 
 git clone https://github.com/vim/vim.git $HOME/src/vim
-cd $HOME/src/vim
+cd vim
 git checkout v8.1.1775
 make clean
 cd src
@@ -69,6 +69,7 @@ sudo update-alternatives --set vi /usr/local/bin/vim
 echo " "
 echo "---------- Installing Ripgrep ----------"
 echo " "
+cd $HOME/Documents
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
@@ -88,7 +89,6 @@ echo "---------- Installing other good to have packages -----------"
 
 sudo apt install chromium-browser fonts-font-awesome firefox ncdu tree htop feh rxvt-unicode-256color evince tmux
 
-ln -fs $HOME/.dotfiles/.mozilla	$HOME/
 mkdir $HOME/Pictures
 cp $HOME/.dotfiles/dracula.png $HOME/Pictures/
 
