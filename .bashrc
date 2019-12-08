@@ -161,7 +161,7 @@ fi
 source ~/.bash_custom
 
 alias tree="tree -f"
-alias uu='apt update && sudo apt upgrade && sudo snap refresh'
+alias uu='apt update && sudo apt upgrade'
 alias df="df -h -x squashfs"
 alias sudo='sudo '
 alias dgrep='sudo dpkg --get-selections | grep '
@@ -169,10 +169,4 @@ alias mkdir="mkdir -p -v"
 alias cdcon='cd ~/.config'
 alias unlock='sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a'
 alias cddot='cd $HOME/.dotfiles'
-
-ln -fs $HOME/.dotfiles/.bashrc $HOME/.bashrc
-ln -fs $HOME/.dotfiles/.tmux-keybinds $HOME/.tmux-keybinds
-ln -fs $HOME/.dotfiles/.tmux-reset $HOME/.tmux-reset
-ln -fs $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
-ln -fs $HOME/.dotfiles/.vimrc $HOME/.vimrc
-ln -fs $HOME/.dotfiles/i3/config $HOME/.config/i3/config
+alias cdown='cd $HOME/Downloads'
