@@ -158,6 +158,8 @@ if [ -z /usr/local/bin/tmux ] && [ -f ~/.tmux.conf ]; then
    tmux source-file ~/.tmux.conf
 fi
 
+
+
 source ~/.bash_custom
 
 alias tree="tree -f"
@@ -170,3 +172,4 @@ alias cdcon='cd ~/.config'
 alias unlock='sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a'
 alias cddot='cd $HOME/.dotfiles'
 alias cdown='cd $HOME/Downloads'
+alias ssh='ssh -X'
