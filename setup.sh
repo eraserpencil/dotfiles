@@ -23,10 +23,6 @@ ln -fs $script_loc/.tmux-reset $HOME/.tmux-reset
 ln -fs $script_loc/.tmux.conf $HOME/.tmux.conf
 ln -fs $script_loc/.vimrc $HOME/.vimrc
 
-echo "hiMakedir"
-if [ ! -d $download_dir ]; then
-    echo "Makedir"
-    mkdir -p $download_dir
 cd $download_dir
 trap 'Symlinking failed'
 
