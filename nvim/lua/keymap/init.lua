@@ -7,12 +7,10 @@ require('keymap.config')
 
 local plug_map = {
     -- Complete
-    ["i|<C-e>"] = map_cmd([[compe#close('<C-e>')]]):with_expr():with_silent(),
-    ["i|<C-f>"] = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr()
-        :with_silent(),
-    ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr()
-        :with_silent(),
-    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
+--    ["i|<C-e>"] = map_cmd([[compe#close('<C-e>')]]):with_expr():with_silent(),
+--    ["i|<C-f>"] = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr():with_silent(),
+--    ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr():with_silent(),
+--    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
     ["i|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
     ["s|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
     ["i|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),

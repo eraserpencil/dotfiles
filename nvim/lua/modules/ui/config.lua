@@ -4,6 +4,7 @@ function config.github()
     require("github-theme").setup({
         -- execute `PackerSync` each time you change it
         themeStyle = "dark", -- light or dark
+        commentStyle = "italic",
         functionStyle = "italic",
         keywordStyle = "bold",
         hideInactiveStatusline = true,
