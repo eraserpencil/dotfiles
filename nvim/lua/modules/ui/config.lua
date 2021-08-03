@@ -3,7 +3,6 @@ local config = {}
 function config.onedark()
     require("onedark").setup({
         -- execute `PackerSync` each time you change it
-        --themeStyle = "dark", -- light or dark
         commentStyle = "italic",
         functionStyle = "italic",
         keywordStyle = "bold",
@@ -69,139 +68,78 @@ function config.lualine()
     }
 end
 
-function config.nvim_bufferline()
-    require('bufferline').setup {
-        options = {
-            number = "both",
-            number_style = "superscript",
-            modified_icon = '✥',
-            buffer_close_icon = "",
-            mappings = true,
-            left_trunc_marker = "",
-            right_trunc_marker = "",
-            max_name_length = 14,
-            max_prefix_length = 13,
-            tab_size = 20,
-            show_buffer_close_icons = true,
-            show_buffer_icons = true,
-            show_tab_indicators = true,
-            separator_style = "thin",
-            diagnostics = "nvim_lsp",
-            always_show_bufferline = true,
-            offsets = {
-                {
-                    filetype = "NvimTree",
-                    text = "File Explorer",
-                    text_align = "center",
-                    padding = 1
-                }
-            }
-        }
-    }
-end
-
-function config.nvim_tree()
-    if not packer_plugins['nvim-tree.lua'].loaded then
-        vim.cmd [[packadd nvim-tree.lua]]
-    end
-    vim.g.nvim_tree_width = 35
-    vim.g.nvim_tree_follow = 1
-    vim.g.nvim_tree_gitignore = 1
-    vim.g.nvim_tree_auto_open = 1
-    vim.g.nvim_tree_auto_close = 1
-    vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
-    vim.g.nvim_tree_quit_on_open = 1
-    vim.g.nvim_tree_indent_markers = 1
-    vim.g.nvim_tree_hide_dotfiles = 0
-    vim.g.nvim_tree_git_hl = 1
-    vim.g.nvim_tree_highdark_opened_files = 1
-    vim.g.nvim_tree_tab_open = 1
-    vim.g.nvim_tree_lsp_diagnostics = 1
-    vim.g.nvim_tree_indent_markers = 1
-    vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
-    vim.g.nvim_tree_icons = {
-        default = '',
-        symlink = '',
-        git = {
-            unstaged = "✚",
-            staged = "✚",
-            unmerged = "≠",
-            renamed = "≫",
-            untracked = "★"
-        }
-    }
-end
-
 function config.gitsigns()
     if not packer_plugins['plenary.nvim'].loaded then
         vim.cmd [[packadd plenary.nvim]]
     end
+
     require('gitsigns').setup {
         signs = {
-            add = {hl = 'GitGutterAdd', text = '▋'},
-            change = {hl = 'GitGutterChange', text = '▋'},
-            delete = {hl = 'GitGutterDelete', text = '▋'},
-            topdelete = {hl = 'GitGutterDeleteChange', text = '▔'},
-            changedelete = {hl = 'GitGutterChange', text = '▎'}
+            add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+            change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+            delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+            topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+            changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
         },
+        numhl = false,
+        linehl = false,
         keymaps = {
             -- Default keymap options
             noremap = true,
-            buffer = true,
 
-            ['n ]g'] = {
-                expr = true,
-                "&diff ? ']g' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"
-            },
-            ['n [g'] = {
-                expr = true,
-                "&diff ? '[g' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"
-            },
+            ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+            ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
 
             ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+            ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
             ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
             ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+            ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+            ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
             ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-            ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+            ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
 
             -- Text objects
-            ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-            ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
-        }
+            ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+        },
+        watch_index = {
+            interval = 1000,
+            follow_files = true
+        },
+        current_line_blame = false,
+        current_line_blame_delay = 1000,
+        current_line_blame_position = 'eol',
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil, -- Use default
+        word_diff = false,
+        use_decoration_api = true,
+        use_internal_diff = true,  -- If luajit is present
     }
 end
 
-function config.indent_blankline()
-    -- vim.cmd [[highdark IndentOne guifg=#BF616A guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highdark IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highdark IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highdark IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highdark IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highdark IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highdark IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
-    -- vim.g.indent_blankline_char_highdark_list = {
-    --     "IndentOne", "IndentTwo", "IndentThree", "IndentFour", "IndentFive",
-    --     "IndentSix", "IndentSeven"
-    -- }
-    vim.g.indent_blankline_char = "│"
-    vim.g.indent_blankline_show_first_indent_level = true
-    vim.g.indent_blankline_filetype_exclude = {
-        "startify", "dashboard", "dotooagenda", "log", "fugitive", "gitcommit",
-        "packer", "vimwiki", "markdown", "json", "txt", "vista", "help",
-        "todoist", "NvimTree", "peekaboo", "git", "TelescopePrompt", "undotree",
-        "flutterToolsOutline", "" -- for all buffers without a file type
-    }
-    vim.g.indent_blankline_buftype_exclude = {"terminal", "nofile"}
-    vim.g.indent_blankline_show_trailing_blankline_indent = false
-    vim.g.indent_blankline_show_current_context = true
-    vim.g.indent_blankline_context_patterns = {
-        "class", "function", "method", "block", "list_literal", "selector",
-        "^if", "^table", "if_statement", "while", "for"
-    }
-    -- because lazy load indent-blankline so need readd this autocmd
-    vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
-end
-
-function config.zen_mode() require('zen-mode').setup {} end
+-- function config.indent_blankline()
+--     require("indent_blankline").setup {
+--         vim.g.indent_blankline_char = "│",
+--         indent_blankline_show_first_indent_level = true,
+--         -- indent_blankline_filetype_exclude = {
+--         --     "startify", "dashboard", "dotooagenda", "log", "fugitive", "gitcommit",
+--         --     "packer", "vimwiki", "markdown", "json", "txt", "vista", "help",
+--         --     "todoist", "NvimTree", "peekaboo", "git", "TelescopePrompt", "undotree",
+--         --     "flutterToolsOutline", "" -- for all buffers without a file type
+--         -- }
+--         indent_blankline_buftype_exclude = {"terminal", "nofile"},
+--         indent_blankline_show_trailing_blankline_indent = false,
+--         indent_blankline_show_current_context = true,
+--         indent_blankline_context_patterns = {
+--             "class", "function", "method", "block", "list_literal", "selector",
+--             "^if", "^table", "if_statement", "while", "for"
+--         },
+-- 
+--         -- because lazy load indent-blankline so need readd this autocmd
+--         -- vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
+--     }
+-- end
 
 return config
