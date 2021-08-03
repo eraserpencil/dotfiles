@@ -1,9 +1,13 @@
 local ui = {}
 local conf = require('modules.ui.config')
 
-ui['projekt0n/github-nvim-theme'] = {
+--ui['projekt0n/github-nvim-theme'] = {
+--    opt = false,
+--    config = conf.github,
+--}
+ui['monsonjeremy/onedark.nvim'] = {
     opt = false,
-    config = conf.github,
+    config = conf.onedark,
 }
 ui['hoob3rt/lualine.nvim'] = {opt = false, config = conf.lualine}
 --ui['glepnir/dashboard-nvim'] = {opt = false, config = conf.dashboard}

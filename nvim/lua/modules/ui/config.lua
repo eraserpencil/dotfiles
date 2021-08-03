@@ -1,9 +1,9 @@
 local config = {}
 
-function config.github()
-    require("github-theme").setup({
+function config.onedark()
+    require("onedark").setup({
         -- execute `PackerSync` each time you change it
-        themeStyle = "dark", -- light or dark
+        --themeStyle = "dark", -- light or dark
         commentStyle = "italic",
         functionStyle = "italic",
         keywordStyle = "bold",
@@ -16,25 +16,26 @@ function config.github()
 end
 
 function config.lualine()
-    local function lsp()
-        local icon = [[ LSP: ]]
-        local msg = 'No Active LSP'
-        local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-        local clients = vim.lsp.get_active_clients()
-        if next(clients) == nil then return icon .. msg end
-        for _, client in ipairs(clients) do
-            local filetypes = client.config.filetypes
-            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                return icon .. client.name
-            end
-        end
-        return icon .. msg
-    end
+    --local function lsp()
+    --    local icon = [[ LSP: ]]
+    --    local msg = 'No Active LSP'
+    --    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    --    local clients = vim.lsp.get_active_clients()
+    --    if next(clients) == nil then return icon .. msg end
+    --    for _, client in ipairs(clients) do
+    --        local filetypes = client.config.filetypes
+    --        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+    --            return icon .. client.name
+    --        end
+    --    end
+    --    return icon .. msg
+    --end
 
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'github',
+            theme = 'onedark',
+            section_seperators = {"|"},
             disabled_filetypes = {}
         },
 
@@ -43,22 +44,15 @@ function config.lualine()
             lualine_b = {
                 {'branch'}, {
                     'diff',
-                    -- Is it me or the symbol for modified us really weird
                     symbols = {
-                        added = ' ',
-                        modified = '柳 ',
-                        removed = ' '
+                        added = '+',
+                        modified = '*',
+                        removed = '-'
                     }
                 }
             },
-            lualine_c = {
-                {'filename'}, {
-                    'diagnostics',
-                    sources = {'nvim_lsp'},
-                    symbols = {error = ' ', warn = ' ', info = ' '}
-                }
-            },
-            lualine_x = {{lsp}, {'encoding'}, {'fileformat'}},
+            lualine_c = {'filename'},
+            lualine_x = {'diagnostics', sources = {"coc"}},
             lualine_y = {'progress'},
             lualine_z = {'location'}
         },
@@ -105,63 +99,6 @@ function config.nvim_bufferline()
         }
     }
 end
-
---function config.dashboard()
---    local home = os.getenv('HOME')
---    vim.g.dashboard_footer_icon = '🐬 '
---    vim.g.dashboard_default_executive = 'telescope'
---
---    vim.g.dashboard_custom_header = {
---        [[              ...  .......          ]],
---        [[         ....................       ]],
---        [[    ..'........................     ]],
---        [[ ...,'.......'.., .........'....    ]],
---        [[  .'......,. ;'., '..'.......'.'.   ]],
---        [[ .'.,'.''.;..,'.. .  ...'....','..  ]],
---        [[..''.'.''''.....        .,'....;'.. ]],
---        [[..',.......'. .        ..';'..','...]],
---        [[ ....''..  ..        .....;,..','...]],
---        [[  . .....           ......,..';,....]],
---        [[      .'.         ....  ... ,,'.....]],
---        [[      .,..             .....,'..... ]],
---        [[     .'''.             ...'......   ]],
---        [[     ..'..'.          ... ......    ]],
---        [[       . '.'..             ..       ]],
---        [[         ......           .         ]],
---        [[            ....                    ]]
---    }
---
---    vim.g.dashboard_custom_section = {
---        change_colorscheme = {
---            description = {' Scheme change              comma s c '},
---            command = 'DashboardChangeColorscheme'
---        },
---        find_frecency = {
---            description = {' File frecency              comma f r '},
---            command = 'Telescope frecency'
---        },
---        find_history = {
---            description = {' File history               comma f e '},
---            command = 'DashboardFindHistory'
---        },
---        find_project = {
---            description = {' Project find               comma f p '},
---            command = 'Telescope project'
---        },
---        find_file = {
---            description = {' File find                  comma f f '},
---            command = 'DashboardFindFile'
---        },
---        file_new = {
---            description = {' File new                   comma f n '},
---            command = 'DashboardNewFile'
---        },
---        find_word = {
---            description = {' Word find                  comma f w '},
---            command = 'DashboardFindWord'
---        }
---    }
---end
 
 function config.nvim_tree()
     if not packer_plugins['nvim-tree.lua'].loaded then
