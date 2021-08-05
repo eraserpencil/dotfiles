@@ -20,8 +20,10 @@ _G.tab_complete = function()
         return t "<C-n>"
 --    elseif vim.fn.call("vsnip#available", {1}) == 1 then
 --        return t "<Plug>(vsnip-expand-or-jump)"
-    else check_back_space()
+    elseif check_back_space() then
         return t "<Tab>"
+    else
+        return vim.fn['compe#complete']()
     end
 end
 

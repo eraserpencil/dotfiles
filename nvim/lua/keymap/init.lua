@@ -7,10 +7,12 @@ require('keymap.config')
 
 local plug_map = {
     -- Complete
---    ["i|<C-e>"] = map_cmd([[compe#close('<C-e>')]]):with_expr():with_silent(),
---    ["i|<C-f>"] = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr():with_silent(),
---    ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr():with_silent(),
---    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
+    ["i|<C-e>"] = map_cmd([[compe#close('<C-e>')]]):with_expr():with_silent(),
+    ["i|<C-f>"] = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr()
+        :with_silent(),
+    ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr()
+        :with_silent(),
+    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
     ["i|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
     ["s|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
     ["i|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
@@ -37,38 +39,38 @@ local plug_map = {
         :with_nowait(),
     ["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent()
         :with_nowait(),
-    ["n|<C-f>"] = map_cmd(
-        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>"):with_silent()
-        :with_noremap():with_nowait(),
-    ["n|<C-b>"] = map_cmd(
-        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"):with_silent()
-        :with_noremap():with_nowait(),
-    ["n|g["] = map_cr('Lspsaga diagnostic_jump_next'):with_noremap()
-        :with_silent(),
-    ["n|g]"] = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap()
-        :with_silent(),
-    ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
-    ["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap()
-        :with_silent(),
-    ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
-        :with_silent(),
-    ["n|gd"] = map_cr('Lspsaga preview_definition'):with_noremap():with_silent(),
+--    ["n|<C-f>"] = map_cmd(
+--        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>"):with_silent()
+--        :with_noremap():with_nowait(),
+--    ["n|<C-b>"] = map_cmd(
+--        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"):with_silent()
+--        :with_noremap():with_nowait(),
+--    ["n|g["] = map_cr('Lspsaga diagnostic_jump_next'):with_noremap()
+--        :with_silent(),
+--    ["n|g]"] = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap()
+--        :with_silent(),
+--    ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
+--    ["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap()
+--        :with_silent(),
+--    ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
+--        :with_silent(),
+--    ["n|gd"] = map_cr('Lspsaga preview_definition'):with_noremap():with_silent(),
     ["n|gD"] = map_cmd("<cmd>lua vim.lsp.buf.implementation()<CR>"):with_noremap()
         :with_silent(),
-    ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),
-    ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),
-    ["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
+--     ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),
+--     ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),
+--     ["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
     ["n|gt"] = map_cmd("<cmd>lua vim.lsp.buf.type_definition()<CR>"):with_noremap()
         :with_silent(),
     ["n|<Leader>cw"] = map_cmd("<cmd>lua vim.lsp.buf.workspace_symbol()<CR>"):with_noremap()
         :with_silent(),
-    ["n|<Leader>ce"] = map_cr('Lspsaga show_line_diagnostics'):with_noremap()
-        :with_silent(),
-    ["n|<A-d>"] = map_cu('Lspsaga open_floaterm'):with_noremap():with_silent(),
-    ["t|<A-d>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap()
-        :with_silent(),
-    ["n|<Leader>g"] = map_cu("Lspsaga open_floaterm gitui"):with_noremap()
-        :with_silent(),
+--    ["n|<Leader>ce"] = map_cr('Lspsaga show_line_diagnostics'):with_noremap()
+--        :with_silent(),
+--    ["n|<A-d>"] = map_cu('Lspsaga open_floaterm'):with_noremap():with_silent(),
+--    ["t|<A-d>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap()
+--        :with_silent(),
+--    ["n|<Leader>g"] = map_cu("Lspsaga open_floaterm gitui"):with_noremap()
+--        :with_silent(),
     -- Plugin nvim-tree
     ["n|<C-n>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
     ["n|<Leader>nf"] = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),

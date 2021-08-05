@@ -2,9 +2,9 @@ if not packer_plugins['nvim-lspconfig'].loaded then
     vim.cmd [[packadd nvim-lspconfig]]
 end
 
-if not packer_plugins['lspsaga.nvim'].loaded then
-    vim.cmd [[packadd lspsaga.nvim]]
-end
+--if not packer_plugins['lspsaga.nvim'].loaded then
+--    vim.cmd [[packadd lspsaga.nvim]]
+--end
 
 if not packer_plugins['nvim-lspinstall'].loaded then
     vim.cmd [[packadd nvim-lspinstall]]
@@ -16,10 +16,10 @@ end
 
 local nvim_lsp = require('lspconfig')
 local lsp_install = require('lspinstall')
-local saga = require('lspsaga')
+-- local saga = require('lspsaga')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-saga.init_lsp_saga({code_action_icon = '💡'})
+-- saga.init_lsp_saga({code_action_icon = '💡'})
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {

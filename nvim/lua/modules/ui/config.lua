@@ -15,20 +15,20 @@ function config.onedark()
 end
 
 function config.lualine()
-    --local function lsp()
-    --    local icon = [[ LSP: ]]
-    --    local msg = 'No Active LSP'
-    --    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    --    local clients = vim.lsp.get_active_clients()
-    --    if next(clients) == nil then return icon .. msg end
-    --    for _, client in ipairs(clients) do
-    --        local filetypes = client.config.filetypes
-    --        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-    --            return icon .. client.name
-    --        end
-    --    end
-    --    return icon .. msg
-    --end
+    local function lsp()
+        local icon = [[ LSP: ]]
+        local msg = 'No Active LSP'
+        local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+        local clients = vim.lsp.get_active_clients()
+        if next(clients) == nil then return icon .. msg end
+        for _, client in ipairs(clients) do
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return icon .. client.name
+            end
+        end
+        return icon .. msg
+    end
 
     require('lualine').setup {
         options = {
@@ -51,7 +51,7 @@ function config.lualine()
                 }
             },
             lualine_c = {'filename'},
-            lualine_x = {'diagnostics', sources = {"coc"}},
+            lualine_x = {{lsp}, {'encoding'}, {'fileformat'}},
             lualine_y = {'progress'},
             lualine_z = {'location'}
         },
