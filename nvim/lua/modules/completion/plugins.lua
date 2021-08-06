@@ -16,7 +16,11 @@ completion['hrsh7th/nvim-compe'] = {
     after = 'nvim-lspconfig',
     config = conf.compe
 }
-completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
+completion['ray-x/lsp_signature.nvim'] = {
+    opt = true,
+    after = 'nvim-lspconfig',
+    config = conf.nvim_signature
+}
 completion['windwp/nvim-autopairs'] = {
     opt = true,
     event = 'InsertCharPre',

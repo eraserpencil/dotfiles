@@ -12,9 +12,9 @@ ui['lewis6991/gitsigns.nvim'] = {
     config = conf.gitsigns,
     requires = {'nvim-lua/plenary.nvim', opt = true}
 }
- -- ui['lukas-reineke/indent-blankline.nvim'] = {
- --     opt = false,
- --     event = 'BufRead',
- --     config = conf.indent_blankline
- -- }
+ ui['lukas-reineke/indent-blankline.nvim'] = {
+     opt = false,
+     event = 'BufRead',
+     config = conf.indent_blankline
+ }
 return ui

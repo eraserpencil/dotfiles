@@ -60,4 +60,10 @@ function config.autopairs()
     })
 end
 
+--function config.nvim_signature()
+--    require("lsp_signature").setup({
+--
+--    })
+--end
+
 return config

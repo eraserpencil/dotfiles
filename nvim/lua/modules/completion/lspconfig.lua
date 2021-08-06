@@ -21,7 +21,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- saga.init_lsp_saga({code_action_icon = '💡'})
 
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {'documentation', 'detail', 'additionalTextEdits'}
 }
@@ -40,7 +39,7 @@ local function setup_servers()
                     fix_pos = true,
                     hint_enable = true,
                     hi_parameter = "Search",
-                    handler_opts = {"double"}
+                    handler_opts = {"shadow"}
                 })
             end
         }

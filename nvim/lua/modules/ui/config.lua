@@ -16,7 +16,7 @@ end
 
 function config.lualine()
     local function lsp()
-        local icon = [[ LSP: ]]
+        local icon = [[ LSP: ]]
         local msg = 'No Active LSP'
         local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
         local clients = vim.lsp.get_active_clients()
@@ -119,27 +119,26 @@ function config.gitsigns()
     }
 end
 
--- function config.indent_blankline()
---     require("indent_blankline").setup {
---         vim.g.indent_blankline_char = "│",
---         indent_blankline_show_first_indent_level = true,
---         -- indent_blankline_filetype_exclude = {
---         --     "startify", "dashboard", "dotooagenda", "log", "fugitive", "gitcommit",
---         --     "packer", "vimwiki", "markdown", "json", "txt", "vista", "help",
---         --     "todoist", "NvimTree", "peekaboo", "git", "TelescopePrompt", "undotree",
---         --     "flutterToolsOutline", "" -- for all buffers without a file type
---         -- }
---         indent_blankline_buftype_exclude = {"terminal", "nofile"},
---         indent_blankline_show_trailing_blankline_indent = false,
---         indent_blankline_show_current_context = true,
---         indent_blankline_context_patterns = {
---             "class", "function", "method", "block", "list_literal", "selector",
---             "^if", "^table", "if_statement", "while", "for"
---         },
--- 
---         -- because lazy load indent-blankline so need readd this autocmd
---         -- vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
---     }
--- end
+function config.indent_blankline()
+    require("indent_blankline").setup {
+        indent_blankline_space_char = '',
+        indent_blankline_show_first_indent_level = true,
+        indent_blankline_filetype_exclude = {
+            "startify", "dashboard", "dotooagenda", "log", "fugitive", "gitcommit",
+            "packer", "vimwiki", "markdown", "json", "txt", "vista", "help",
+            "todoist", "NvimTree", "peekaboo", "git", "TelescopePrompt", "undotree",
+            "flutterToolsOutline", "" -- for all buffers without a file type
+        },
+        indent_blankline_buftype_exclude = {"terminal", "nofile"},
+        indent_blankline_show_trailing_blankline_indent = false,
+        indent_blankline_show_current_context = true,
+        indent_blankline_context_patterns = {
+            "class", "function", "method", "block", "list_literal", "selector",
+            "^if", "^table", "if_statement", "while", "for"
+        },
+        -- because lazy load indent-blankline so need readd this autocmd
+        vim.cmd('autocmd CursorMoved * IndentBlanklineRefresh')
+    }
+end
 
 return config
