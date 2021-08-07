@@ -69,9 +69,9 @@ function config.lualine()
 end
 
 function config.gitsigns()
-    if not packer_plugins['plenary.nvim'].loaded then
-        vim.cmd [[packadd plenary.nvim]]
-    end
+    --if not packer_plugins['plenary.nvim'].loaded then
+    --    vim.cmd [[packadd plenary.nvim]]
+    --end
 
     require('gitsigns').setup {
         signs = {
