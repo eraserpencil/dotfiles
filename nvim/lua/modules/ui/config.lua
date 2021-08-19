@@ -59,7 +59,9 @@ function config.indent_blankline()
     vim.cmd [[highlight IndentOdd guifg=#44475a guibg=NONE gui=nocombine]]
     require("indent_blankline").setup {
         char = "|",
+        space_char = ".",
         char_highlight_list = {"IndentOdd"},
+        space_char_highlight_list = {"IndentOdd"},
         filetype_exclude = {
             "startify", "dashboard", "dotooagenda", "log", "fugitive",
             "gitcommit", "packer", "vimwiki", "markdown", "json", "txt",
