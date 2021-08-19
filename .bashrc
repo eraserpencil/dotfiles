@@ -38,20 +38,13 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    tmux|*-256color) color_prompt=yes;;
+    *kitty|tmux|screen|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
-
-# chech whether we are in tmux or not
-if ! { [ "$TERM" = "screen-256color" ] && [ -n "$TMUX" ]; } then
-  TMUX_SHELL=no
-else
-  TMUX_SHELL=yes
-fi
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -112,8 +105,6 @@ st)
     ;;
 esac
 
-export TERM=tmux-256color
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -158,18 +149,17 @@ if [ -z /usr/local/bin/tmux ] && [ -f ~/.tmux.conf ]; then
    tmux source-file ~/.tmux.conf
 fi
 
-
-
-source ~/.bash_custom
-
 alias tree="tree -f"
 alias uu='apt update && sudo apt upgrade'
 alias df="df -h -x squashfs"
 alias sudo='sudo '
 alias dgrep='sudo dpkg --get-selections | grep '
 alias mkdir="mkdir -p -v"
-alias cdcon='cd ~/.config'
 alias unlock='sudo rm /var/lib/apt/lists/lock && sudo rm /var/cache/apt/archives/lock && sudo rm /var/lib/dpkg/lock && sudo dpkg --configure -a'
-alias cddot='cd $HOME/.dotfiles'
 alias cdown='cd $HOME/Downloads'
 alias ssh='ssh -X'
+alias cdsrc="cd ~/.local/src"
+alias cdshared="cd /mnt/hgfs"
+alias vim="/usr/bin/nvim"
+
+export DOCKER_CONFIG=/home/ryan/.docker

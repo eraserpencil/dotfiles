@@ -95,18 +95,18 @@ local plug_map = {
 --    ["n|gcc"] = map_cu("Commentary"):with_noremap():with_silent(),
 --    ["v|gc"] = map_cu("Commentary"):with_noremap():with_silent(),
     -- Plugin accelerate-jk
-    ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
-    ["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
-    -- Plugin Easymotion
-    ["n|<leader>j"] = map_cmd("v:lua.enhance_move('lnj')"):with_expr(),
-    ["n|<leader>k"] = map_cmd("v:lua.enhance_move('lnk')"):with_expr(),
-    ["n|<leader>f"] = map_cmd("v:lua.enhance_move('lnf')"):with_expr(),
-    ["n|<leader>w"] = map_cmd("v:lua.enhance_move('lnw')"):with_expr(),
-    ["|<leader>f"] = map_cmd("v:lua.enhance_move('lf')"):with_expr(),
-    ["|<leader>w"] = map_cmd("v:lua.enhance_move('lw')"):with_expr(),
-    -- Plugin EasyAlign
-    ["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
-    ["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
+--     ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
+--     ["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
+--     -- Plugin Easymotion
+--     ["n|<leader>j"] = map_cmd("v:lua.enhance_move('lnj')"):with_expr(),
+--     ["n|<leader>k"] = map_cmd("v:lua.enhance_move('lnk')"):with_expr(),
+--     ["n|<leader>f"] = map_cmd("v:lua.enhance_move('lnf')"):with_expr(),
+--     ["n|<leader>w"] = map_cmd("v:lua.enhance_move('lnw')"):with_expr(),
+--     ["|<leader>f"] = map_cmd("v:lua.enhance_move('lf')"):with_expr(),
+--     ["|<leader>w"] = map_cmd("v:lua.enhance_move('lw')"):with_expr(),
+--     -- Plugin EasyAlign
+--     ["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
+--     ["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
     -- Plugin ZenMode
     -- Plugin SymbolOutline
     -- ["n|<leader>t"] = map_cr('SymbolsOutline'):with_noremap():with_silent(),
