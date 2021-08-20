@@ -1,9 +1,39 @@
 local config = {}
-local global = require('core.global')
-local session_dir = global.data_dir .. '/session'
 
-if vim.fn.isdirectory(session_dir) ~= 1 then
-    os.execute('mkdir -p ' .. session_dir)
+function config.neoformat()
+    vim.g.neoformat_python_enabled_python = "black"
+
+end
+
+function config.vim_cursorwod()
+    vim.api.nvim_command('augroup user_plugin_cursorword')
+    vim.api.nvim_command('autocmd!')
+    vim.api.nvim_command(
+        'autocmd FileType NvimTree,lspsagafinder,dashboard let b:cursorword = 0')
+    vim.api.nvim_command(
+        'autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif')
+    vim.api.nvim_command('autocmd InsertEnter * let b:cursorword = 0')
+    vim.api.nvim_command('autocmd InsertLeave * let b:cursorword = 1')
+    vim.api.nvim_command('augroup END')
+end
+
+function config.nvim_colorizer()
+    require('colorizer').setup()
+end
+
+function config.easymotion()
+    vim.g.EasyMotion_do_mapping = 1
+    vim.g.EasyMotion_smartcase = 1
+    vim.g.EasyMotion_use_smartsign_us = 1
+end
+
+function config.autotag()
+    require('nvim-ts-autotag').setup({
+        filetypes = {
+            "html", "xml", "javascript", "typescriptreact", "javascriptreact",
+            "vue"
+        }
+    })
 end
 
 -- function config.nvim_treesitter()
@@ -46,16 +76,4 @@ end
 --         }
 --     }
 -- end
-
-function config.neoformat()
-    vim.g.neoformat_python_enabled_python = "black"
-
-end
-
-function config.easymotion()
-    vim.g.EasyMotion_do_mapping = 1
-    vim.g.EasyMotion_smartcase = 1
-    vim.g.EasyMotion_use_smartsign_us = 1
-end
-
 return config

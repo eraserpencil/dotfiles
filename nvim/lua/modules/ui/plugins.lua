@@ -11,5 +11,17 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     event = 'BufRead',
     config = conf.indent_blankline
 }
+ui['kyazdani42/nvim-tree.lua'] = {
+    opt = false,
+--    cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
+    config = conf.nvim_tree
+}
+ui['akinsho/nvim-bufferline.lua'] = {
+  opt = false, 
+  config = conf.nvim_bufferline
+}  
+ui['kyazdani42/nvim-web-devicons'] = {
+  opt = false
+}
 
 return ui
